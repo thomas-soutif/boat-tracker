@@ -37,5 +37,13 @@ class Containership{
         return "Containership(name='$name', captainName='$captainName')"
     }
 
+    public fun getName(): String{
 
+        return this.name
+    }
+
+    public fun getCaptainName(): String{
+
+        return this.captainName
+    }
 }

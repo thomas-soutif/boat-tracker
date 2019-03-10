@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.s16005532.boat_tracker.Model.Containership
 
 class Displaymain : AppCompatActivity(),View.OnClickListener{
 
@@ -27,7 +26,7 @@ class Displaymain : AppCompatActivity(),View.OnClickListener{
 
             R.id.BT_showListBoat->  {
 
-                val myShowListBoatIntend : Intent  =  Intent(this, showBoat::class.java)
+                val myShowListBoatIntend : Intent  =  Intent(this, ShowBoat::class.java)
                 startActivity(Intent(myShowListBoatIntend))
 
                 findViewById<TextView>(R.id.text).setText("allo")

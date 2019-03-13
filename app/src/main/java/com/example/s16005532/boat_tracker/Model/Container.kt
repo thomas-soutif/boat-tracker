@@ -1,6 +1,8 @@
 package com.example.s16005532.boat_tracker.Model
 
-class Container{
+import java.io.Serializable
+
+class Container : Serializable{
 
     private var id: Int
     private var length: Int

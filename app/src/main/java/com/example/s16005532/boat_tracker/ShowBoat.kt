@@ -24,102 +24,46 @@ import android.content.Intent
 import android.nfc.Tag
 import android.util.Log
 import android.widget.AdapterView.VIEW_LOG_TAG
+import com.example.s16005532.boat_tracker.Model.ContainershipType
 
 
-class ShowBoat : AppCompatActivity(), View.OnClickListener,AdapterView.OnItemClickListener {
+class ShowBoat : AppCompatActivity() {
 
-        private var TAG: String = "L/ ShowBoat ---------"
+
+    private var TAG: String = "L/ ShowBoat ---------"
+    private var list: ArrayList<Containership> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_boat)
-        val mon_bateau = Containership(1, "Merry", "Luffy", (12.12).toFloat(), (12.85).toFloat(), Port(1,"MerryPort",80.56.toFloat(),148.21.toFloat()), null, null)
-        val mon_bateau2 = Containership(2, "Death", "SkullTomson", (475.25).toFloat(), (487.85).toFloat(), Port(2,"DeathPort",0.000.toFloat(),0.0001.toFloat()), null, null)
-        val list = ArrayList<Containership>()
+        val typeship = ContainershipType(1,"Xd8",45,10,15)
+        val mon_bateau = Containership(1, "Merry", "Luffy", (12.12).toFloat(), (12.85).toFloat(), Port(1,"MerryPort",80.56.toFloat(),148.21.toFloat()), typeship, null)
+        val mon_bateau2 = Containership(2, "Death", "SkullTomson", (475.25).toFloat(), (487.85).toFloat(), Port(2,"DeathPort",0.000.toFloat(),0.0001.toFloat()), typeship, null)
+        //val list = ArrayList<Containership>()
 
         list.add(mon_bateau)
         list.add(mon_bateau2)
-        var adapter: BoatListAdapter
-        adapter = BoatListAdapter(this,list)
+        //var adapter: BoatListAdapter
+        //adapter = BoatListAdapter(this,list)
         var list_boat: ListView = findViewById(R.id.list_boat)
-        list_boat.adapter=adapter
+        var adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,list)
+        list_boat.adapter = adapter
 
 
         list_boat.setOnItemClickListener { parent, view, position, id ->
 
-            Toast.makeText(this,"allo Zacord ",Toast.LENGTH_LONG).show()
-            Log.d(TAG,"item listener")
+
+            Toast.makeText(this,list.get(position).getName(),Toast.LENGTH_LONG).show()
+            val myintent: Intent = Intent(this,ShowDetailBoat::class.java)
+            myintent.putExtra("object",list.get(position))
+            startActivity(myintent)
+
         }
 
-    }
-
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
 
     }
 
-    override fun onClick(v: View?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+
 }
 
-
-
-// class ShowBoat : AppCompatActivity() {
-// var listView: ListView? = null
-// var boatList = ArrayList<Containership>()
-// var adapter: BoatListViewAdapter? = null
-//
-// override fun onCreate(savedInstanceState : Bundle?){
-//
-// super.onCreate(savedInstanceState)
-// setContentView(R.layout.show_boat)
-// val mon_bateau = Containership(1,"Merry","Luffy",(12.12).toFloat(),(12.85).toFloat(),null,null,null)
-// listView = findViewById(R.id.list_boat)
-// boatList.add(mon_bateau)
-// adapter = BoatListViewAdapter(this,boatList)
-//
-//
-//
-// adapter?.notifyDataSetChanged()
-// }
-//
-// class BoatListViewAdapter(private val activity: Activity, boatList: List<Containership>): BaseAdapter() {
-//
-// private var boatList = ArrayList<Containership>()
-//
-// init {
-// this.boatList = boatList as ArrayList
-// }
-// @SuppressLint("InflateParams","ViewHolder")
-// override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-// var vi: View = convertView as View
-// val inflater = activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-// vi = inflater.inflate(R.layout.boat_list_row,null)
-// val name_boat = vi.findViewById<TextView>(R.id.name_boat)
-// val name_captain = vi.findViewById<TextView>(R.id.captain_name)
-// name_boat.text = boatList[position].getName()
-// name_captain.text = boatList[position].getCaptainName()
-// return vi
-//
-//
-// }
-//
-// override fun getItem(position: Int): Any {
-// return position
-// }
-//
-// override fun getItemId(position: Int): Long {
-// return position.toLong()
-// }
-//
-// override fun getCount(): Int {
-// return boatList.size
-// }
-//
-//
-// }
-//
-//
-// }

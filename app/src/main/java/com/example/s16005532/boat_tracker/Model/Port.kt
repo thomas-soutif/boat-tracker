@@ -1,6 +1,8 @@
 package com.example.s16005532.boat_tracker.Model
 
-class Port{
+import java.io.Serializable
+
+class Port : Serializable{
 
     private var id: Int
     private var name: String
@@ -12,5 +14,14 @@ class Port{
         this.name = name
         this.latitude = latitude
         this.longitude = longitude
+    }
+
+    public fun getLatitude() : Float {
+
+        return this.latitude
+    }
+    public fun getLongitude() : Float {
+
+        return this.longitude
     }
 }

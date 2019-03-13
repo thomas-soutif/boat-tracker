@@ -1,8 +1,10 @@
 package com.example.s16005532.boat_tracker.Model
 
+import java.io.Serializable
 import java.net.PortUnreachableException
 
-class Containership{
+class Containership : Serializable
+{
 
     private var id: Int = 0
     private var name: String
@@ -34,7 +36,8 @@ class Containership{
     }
 
     override fun toString(): String {
-        return "Containership(name='$name', captainName='$captainName')"
+        var newLine : String? = System.getProperty("line.separator")
+        return "Boat number ° $id"+ newLine +"Name=$name " + newLine+ "CaptainName=$captainName"
     }
 
     public fun getName(): String{
@@ -45,5 +48,23 @@ class Containership{
     public fun getCaptainName(): String{
 
         return this.captainName
+    }
+
+    public fun getType(): ContainershipType? {
+
+        return this.type
+    }
+
+    public fun getLatitude() : Float {
+
+        return this.latitude
+    }
+    public fun getLongitude() : Float {
+
+        return this.longitude
+    }
+    public fun getPort() : Port? {
+
+        return this.port
     }
 }

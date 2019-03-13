@@ -1,6 +1,8 @@
 package com.example.s16005532.boat_tracker.Model
 
-class ContainershipType{
+import java.io.Serializable
+
+class ContainershipType : Serializable{
 
     private var id: Int
     private var name: String
@@ -16,4 +18,11 @@ class ContainershipType{
         this.height = height
         this.width = width
     }
+
+    public fun getName() : String{
+
+        return this.name
+
+    }
+
 }

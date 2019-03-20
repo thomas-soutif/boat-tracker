@@ -2,6 +2,7 @@ package com.example.s16005532.boat_tracker
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -27,11 +28,15 @@ import android.widget.AdapterView.VIEW_LOG_TAG
 import com.example.s16005532.boat_tracker.Model.ContainershipType
 
 
-class ShowBoat : AppCompatActivity() {
+class ShowBoat : AppCompatActivity(){
 
 
     private var TAG: String = "L/ ShowBoat ---------"
     private var list: ArrayList<Containership> = ArrayList()
+    companion object {
+        public  var actual_boat: Containership? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
@@ -56,13 +61,16 @@ class ShowBoat : AppCompatActivity() {
 
             Toast.makeText(this,list.get(position).getName(),Toast.LENGTH_LONG).show()
             val myintent: Intent = Intent(this,ShowDetailBoat::class.java)
-            myintent.putExtra("object",list.get(position))
+            ShowBoat.actual_boat = list.get(position)
+            //myintent.putExtra("object",list.get(position))
             startActivity(myintent)
 
         }
 
 
     }
+
+
 
 
 }

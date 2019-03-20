@@ -44,7 +44,8 @@
         <TextView
                 android:text="Distance du port :"
                 android:layout_width="30dp"
-                android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="1"/>
+                android:layout_height="wrap_content" android:id="@+id/textView4" android:layout_weight="1"
+                android:baselineAligned="false"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/distance" android:layout_weight="1"/>
@@ -57,6 +58,17 @@
                 android:text="CALCULER DISTANCE"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" android:id="@+id/button4"/>
+
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="43dp">
+        <Button
+                android:text="AFFICHER LE BATEAU SUR MAPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/button_showMap"/>
+
     </LinearLayout>
 
 

@@ -3,13 +3,10 @@ package com.example.s16005532.boat_tracker
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.FloatMath
 import android.util.Log
-import android.view.Menu
 import android.widget.Button
 import android.widget.TextView
 import com.example.s16005532.boat_tracker.Model.Containership
-import java.io.Serializable
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -30,18 +27,26 @@ class ShowDetailBoat : AppCompatActivity() {
         var modele_ship : TextView = findViewById(R.id.model)
         var distance: TextView = findViewById(R.id.distance)
 
-        var bateau = intent.getSerializableExtra("object") as Containership
+        //var bateau = intent.getSerializableExtra("object") as Containership
+        var bateau = ShowBoat.actual_boat
+        name_ship.text = bateau!!.getName()
+        modele_ship.text = bateau!!.getType()!!.getName()
 
-        name_ship.text = bateau.getName()
-        modele_ship.text = bateau.getType()!!.getName()
 
-
-        val button : Button = findViewById(R.id.button4)
-        button.setOnClickListener {
+        val buttonCalcul : Button = findViewById(R.id.button4)
+        val buttonShowMaps : Button = findViewById(R.id.button_showMap)
+        buttonCalcul.setOnClickListener {
             val distance_string: String = gps2m(bateau.getLatitude(),bateau.getLongitude(), bateau.getPort()!!.getLatitude(),
                 bateau.getPort()!!.getLongitude()).toString()
             distance.text = distance_string
             Log.d(TAG,"click on button")
+        }
+
+        buttonShowMaps.setOnClickListener{
+
+            val myintent: Intent = Intent(this,BoatOnMaps::class.java)
+
+            startActivity(myintent)
         }
 
     }

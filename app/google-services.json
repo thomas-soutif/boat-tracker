@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "881418179557",
+    "firebase_url": "https://light-mountain-235116.firebaseio.com",
+    "project_id": "light-mountain-235116",
+    "storage_bucket": "light-mountain-235116.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881418179557:android:843406f23478332d",
+        "android_client_info": {
+          "package_name": "com.example.s16005532.boat_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881418179557-63da51bh4m4n2p0q7shoolsaqtdh6be3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAhO2LrNEk7Mdrpv1VcNZ0d62muz_sLhc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

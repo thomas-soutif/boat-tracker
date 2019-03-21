@@ -43,8 +43,8 @@ class ShowBoat : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_boat)
         val typeship = ContainershipType(1,"Xd8",45,10,15)
-        val mon_bateau = Containership(1, "Merry", "Luffy", (12.12).toFloat(), (12.85).toFloat(), Port(1,"MerryPort",80.56.toFloat(),148.21.toFloat()), typeship, null)
-        val mon_bateau2 = Containership(2, "Death", "SkullTomson", (475.25).toFloat(), (487.85).toFloat(), Port(2,"DeathPort",0.000.toFloat(),0.0001.toFloat()), typeship, null)
+        val mon_bateau = Containership(1, "Merry", "Luffy", (43.296749).toFloat(), (5.357172).toFloat(), Port(1,"MerryPort",80.56.toFloat(),148.21.toFloat()), typeship, null)
+        val mon_bateau2 = Containership(2, "Death", "SkullTomson", (49.285428).toFloat(), (-4.781706).toFloat(), Port(2,"DeathPort",0.000.toFloat(),0.0001.toFloat()), typeship, null)
         //val list = ArrayList<Containership>()
 
         list.add(mon_bateau)

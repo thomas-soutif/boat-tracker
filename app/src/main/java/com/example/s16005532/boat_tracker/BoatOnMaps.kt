@@ -36,8 +36,9 @@ class BoatOnMaps : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+        val posShip = LatLng(ShowBoat.actual_boat!!.getLatitude().toDouble(),ShowBoat.actual_boat!!.getLongitude().toDouble())
+        mMap.addMarker(MarkerOptions().position(posShip).title(ShowBoat.actual_boat!!.getName()))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(posShip))
     }
 }

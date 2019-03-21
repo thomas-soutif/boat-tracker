@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.google.android.gms:play-services-afs-native:16.0.0@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-afs-native-16.0.0.aar/5245e8becb38656c23c6251943c85837/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-afs-native-16.0.0.aar/5245e8becb38656c23c6251943c85837/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-afs-native-16.0.0.aar/a3d3ca3bf5379e139fda0941c4450509/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-afs-native-16.0.0.aar/a3d3ca3bf5379e139fda0941c4450509/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.gms/play-services-afs-native/16.0.0/f5e8343c24b0dd8767e1430e53d08ad1250e881f/play-services-afs-native-16.0.0-javadoc.jar!/" />

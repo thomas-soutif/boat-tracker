@@ -25,7 +25,11 @@ import android.content.Intent
 import android.nfc.Tag
 import android.util.Log
 import android.widget.AdapterView.VIEW_LOG_TAG
+import com.example.s16005532.boat_tracker.Model.Container
 import com.example.s16005532.boat_tracker.Model.ContainershipType
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 
 
 class ShowBoat : AppCompatActivity(){
@@ -42,30 +46,61 @@ class ShowBoat : AppCompatActivity(){
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.show_boat)
+
+        val user = FirebaseAuth.getInstance().currentUser
+
+        val db = FirebaseFirestore.getInstance() // instance de la base de donnée firebase
+
+
+
+
         val typeship = ContainershipType(1,"Xd8",45,10,15)
+
+
+
+
+
+
+
         val mon_bateau = Containership(1, "Merry", "Luffy", (43.296749).toFloat(), (5.357172).toFloat(), Port(1,"MerryPort",80.56.toFloat(),148.21.toFloat()), typeship, null)
         val mon_bateau2 = Containership(2, "Death", "SkullTomson", (49.285428).toFloat(), (-4.781706).toFloat(), Port(2,"DeathPort",0.000.toFloat(),0.0001.toFloat()), typeship, null)
-        //val list = ArrayList<Containership>()
+        val list = ArrayList<Containership>()
 
         list.add(mon_bateau)
         list.add(mon_bateau2)
-        //var adapter: BoatListAdapter
-        //adapter = BoatListAdapter(this,list)
         var list_boat: ListView = findViewById(R.id.list_boat)
         var adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1,list)
         list_boat.adapter = adapter
 
 
-        list_boat.setOnItemClickListener { parent, view, position, id ->
+        if(list.isEmpty())
+        {
+
+            var no_boat = Containership(0,"No boat to show","Verify your database",0.toFloat(),0.toFloat(),null,null,null)
+            list.add(no_boat)
+        }
+        else {
 
 
-            Toast.makeText(this,list.get(position).getName(),Toast.LENGTH_LONG).show()
-            val myintent: Intent = Intent(this,ShowDetailBoat::class.java)
-            ShowBoat.actual_boat = list.get(position)
-            //myintent.putExtra("object",list.get(position))
-            startActivity(myintent)
+
+            list_boat.setOnItemClickListener { parent, view, position, id ->
+
+
+                Toast.makeText(this,list.get(position).getName(),Toast.LENGTH_LONG).show()
+                val myintent: Intent = Intent(this,ShowDetailBoat::class.java)
+                ShowBoat.actual_boat = list.get(position)
+
+                startActivity(myintent)
+
+            }
+
+
+
+
 
         }
+
+
 
 
     }

@@ -2,6 +2,7 @@ package com.example.s16005532.boat_tracker
 
 import android.app.Activity
 import android.content.Intent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -66,27 +67,10 @@ class Displaymain : AppCompatActivity(),View.OnClickListener{
 
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
-
+            Log.d(TAG,"result code :" + resultCode)
             if (resultCode == Activity.RESULT_OK) {
                 // Successfully signed in
-                val user = FirebaseAuth.getInstance().currentUser
 
-                val db = FirebaseFirestore.getInstance() // instance de la base de donnée firebase
-                val port = Port(2,"DeathPort",0.000.toFloat(),0.0001.toFloat())
-                val portBd = HashMap<String,Any>()
-                portBd["id"] = 2
-                portBd["name"] = "DeathPort"
-                portBd["posPort"] = GeoPoint(14.0,54.3)
-
-
-                db.collection("Port")
-                    .add(portBd)
-                    .addOnSuccessListener { documentReference ->
-                        Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w(TAG, "Error adding document", e)
-                    }
                 findViewById<TextView>(R.id.authMsg).setText("L'authentification google a réussit")
                 val BT_showListBoat : Button = findViewById(R.id.BT_showListBoat)
                 BT_showListBoat.setOnClickListener(this)

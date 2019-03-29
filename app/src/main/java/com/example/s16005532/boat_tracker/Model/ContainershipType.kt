@@ -24,5 +24,9 @@ class ContainershipType : Serializable{
         return this.name
 
     }
+    public fun getId(): Int{
+
+        return this.id
+    }
 
 }

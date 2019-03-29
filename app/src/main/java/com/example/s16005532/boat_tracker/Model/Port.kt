@@ -24,4 +24,15 @@ class Port : Serializable{
 
         return this.longitude
     }
+    override fun toString(): String {
+
+        return "id ="+ this.id + " name=" + this.name + " latitude=" + this.latitude + " longitude=" + this.longitude
+
+    }
+
+    public fun getId(): Int{
+
+        return this.id
+    }
+
 }

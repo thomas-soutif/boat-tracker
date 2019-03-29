@@ -8,11 +8,13 @@ class Container : Serializable{
     private var length: Int
     private var height: Int
     private var width: Int
+    private var containershipId: Int
 
-    constructor(id: Int, length: Int, height: Int, width: Int) {
+    constructor(id: Int, length: Int, height: Int, width: Int, containerId: Int) {
         this.id = id
         this.length = length
         this.height = height
         this.width = width
+        this.containershipId = containerId
     }
 }

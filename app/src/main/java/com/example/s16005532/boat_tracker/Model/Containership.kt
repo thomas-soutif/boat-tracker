@@ -1,7 +1,6 @@
 package com.example.s16005532.boat_tracker.Model
 
 import java.io.Serializable
-import java.net.PortUnreachableException
 
 class Containership : Serializable
 {
@@ -14,6 +13,7 @@ class Containership : Serializable
     private var port: Port?
     private var type: ContainershipType?
     private var containers: Array<Container>?
+    private var documentRef: String
 
     constructor(
         id: Int,
@@ -23,7 +23,8 @@ class Containership : Serializable
         longitude: Float,
         port: Port?,
         type: ContainershipType?,
-        containers: Array<Container>?
+        containers: Array<Container>?,
+        documentRef: String
     ) {
         this.id = id
         this.name = name
@@ -33,6 +34,7 @@ class Containership : Serializable
         this.port = port
         this.type = type
         this.containers = containers
+        this.documentRef = documentRef
     }
 
     override fun toString(): String {
@@ -66,5 +68,23 @@ class Containership : Serializable
     public fun getPort() : Port? {
 
         return this.port
+    }
+    public fun getDocumentRef() : String{
+
+        return this.documentRef
+    }
+
+    public fun setName(name : String){
+        this.name = name
+    }
+    public fun setCaptainName(name: String)
+    {
+        this.captainName = name
+    }
+    public fun setLatitude(lat : Float){
+        this.latitude = lat
+    }
+    public fun setLongitude(long : Float){
+        this.longitude = long
     }
 }

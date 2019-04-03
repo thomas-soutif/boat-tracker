@@ -34,10 +34,11 @@ class ShowDetailBoat : AppCompatActivity() {
 
 
         val buttonCalcul : Button = findViewById(R.id.button4)
+        val buttonModify : Button = findViewById(R.id.button_modify)
         val buttonShowMaps : Button = findViewById(R.id.button_showMap)
         buttonCalcul.setOnClickListener {
-            val distance_string: String = gps2m(bateau.getLatitude(),bateau.getLongitude(), bateau.getPort()!!.getLatitude(),
-                bateau.getPort()!!.getLongitude()).toString()
+            val distance_string: String = gps2mToKm(bateau.getLatitude(),bateau.getLongitude(), bateau.getPort()!!.getLatitude(),
+                bateau.getPort()!!.getLongitude()).toString() + " km"
             distance.text = distance_string
             Log.d(TAG,"click on button")
         }
@@ -48,11 +49,17 @@ class ShowDetailBoat : AppCompatActivity() {
 
             startActivity(myintent)
         }
+        buttonModify.setOnClickListener{
+
+            val myintent : Intent = Intent(this,ModifyBoat::class.java)
+            startActivity(myintent)
+        }
 
     }
 
-    private fun gps2m(lat_a: Float, lng_a: Float, lat_b: Float, lng_b: Float): Double {
-        val pk = (180 / 3.14169).toFloat()
+
+    private fun gps2mToKm(lat_a: Float, lng_a: Float, lat_b: Float, lng_b: Float): Double {
+        val pk = (180 / Math.PI).toFloat()
 
         val a1 = lat_a / pk
         val a2 = lng_a / pk
@@ -64,7 +71,7 @@ class ShowDetailBoat : AppCompatActivity() {
         val t3 = sin(a1) * sin(b1)
         val tt = Math.acos((t1 + t2 + t3).toDouble())
 
-        return 6366000 * tt
+        return (6366000 * tt) / 1000
     }
 
 }

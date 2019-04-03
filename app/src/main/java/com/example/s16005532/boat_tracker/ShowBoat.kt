@@ -1,34 +1,16 @@
 package com.example.s16005532.boat_tracker
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.app.Application
-import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.*
-import com.example.s16005532.boat_tracker.Adapter.BoatListAdapter
 import com.example.s16005532.boat_tracker.Model.Containership
 import com.example.s16005532.boat_tracker.Model.Port
-import kotlinx.android.synthetic.main.show_boat.*
-import org.w3c.dom.Text
 import android.widget.Toast
-import android.widget.TextView
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemClickListener
-import android.icu.lang.UCharacter.GraphemeClusterBreak.LV
 import android.content.Intent
-import android.nfc.Tag
 import android.util.Log
-import android.widget.AdapterView.VIEW_LOG_TAG
 import com.example.s16005532.boat_tracker.Model.Container
 import com.example.s16005532.boat_tracker.Model.ContainershipType
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.GeoPoint
 
@@ -44,8 +26,15 @@ class ShowBoat : AppCompatActivity(){
     private val db = FirebaseFirestore.getInstance()// instance de la base de donnée firebase
     companion object {
         public  var actual_boat: Containership? = null
+        var listeContainerShip: ArrayList<Containership> = ArrayList()
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG,"resume Show Boat")
+
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Log.d(TAG,"hey listen")
@@ -53,7 +42,7 @@ class ShowBoat : AppCompatActivity(){
         setContentView(R.layout.show_boat)
 
         val user = FirebaseAuth.getInstance().currentUser
-
+        listeContainerShip.clear()
         getPortListOnFirebase()
 
 
@@ -67,7 +56,7 @@ class ShowBoat : AppCompatActivity(){
     }
 
     private fun nextProcess() {
-        val listeContainerShip: ArrayList<Containership> = ArrayList()
+
 
         db.collection("Containership")
             .get()
@@ -90,9 +79,12 @@ class ShowBoat : AppCompatActivity(){
                         point.longitude.toFloat(),
                         port,
                         type,
-                        null
+                        null,
+                        document.id
                     )
                     listeContainerShip.add(ship)
+                    Log.d(TAG,"ref : " + document.id)
+
                 }
                 nextNextProcess(listeContainerShip)
 
@@ -128,7 +120,7 @@ class ShowBoat : AppCompatActivity(){
         if (list.isEmpty()) {
 
             var no_boat =
-                Containership(0, "No boat to show", "Verify your database", 0.toFloat(), 0.toFloat(), null, null, null)
+                Containership(0, "No boat to show", "Verify your database", 0.toFloat(), 0.toFloat(), null, null, null,"")
             list.add(no_boat)
         } else {
 

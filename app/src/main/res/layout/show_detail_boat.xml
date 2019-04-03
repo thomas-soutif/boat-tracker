@@ -70,6 +70,15 @@
                 android:layout_height="wrap_content" android:id="@+id/button_showMap"/>
 
     </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="43dp">
+        <Button
+                android:text="MODIFIER LE BATEAU"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/button_modify"/>
 
+    </LinearLayout>
 
 </LinearLayout>

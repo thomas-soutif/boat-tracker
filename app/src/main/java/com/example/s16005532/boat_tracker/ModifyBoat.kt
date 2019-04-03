@@ -14,8 +14,8 @@ import com.example.s16005532.boat_tracker.Model.Containership
 import com.example.s16005532.boat_tracker.Model.ContainershipType
 import com.example.s16005532.boat_tracker.Model.Port
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.GeoPoint
 import kotlinx.android.synthetic.main.display_main.view.*
 import kotlinx.android.synthetic.main.modify_boat.*
 
@@ -50,76 +50,93 @@ class ModifyBoat : AppCompatActivity() {
 
             var new_name: TextInputEditText = findViewById(R.id.new_name)
             var new_captain : TextInputEditText = findViewById(R.id.new_captain)
+            var new_latitude : EditText = findViewById(R.id.latitude_number)
+            var new_longitude : EditText = findViewById(R.id.longitude_number)
+
+
+
             val containerShipRef = db.collection("Containership").document(bateau!!.getDocumentRef())
             var number_modify : Int = 0
             ShowBoat.listeContainerShip.remove(bateau)
 
-            number_modify = UpdateData(new_name, containerShipRef, bateau, number_modify, new_captain)
+            if(!new_name.text.toString().isEmpty())
+            {
 
 
+                containerShipRef
+                    .update(
+                        "name",new_name.text.toString()
+
+                    )
+                    .addOnSuccessListener {
+                        Log.d(TAG, "Name successfully updated!")
+                        bateau.setName(new_name.text.toString())
+                        Toast.makeText(this, "new name update", Toast.LENGTH_LONG).show()
+                        number_modify = number_modify.plus(1)
+                    }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
+
+
+            }
+
+            if(!new_captain.text.toString().isEmpty())
+            {
+                containerShipRef
+                    .update(
+                        "captain_name",new_captain.text.toString()
+                    )
+                    .addOnSuccessListener {
+                        Log.d(TAG, " Captain Name successfully updated!")
+                        bateau.setCaptainName(new_captain.text.toString())
+                        Toast.makeText(this, "new  captain name update", Toast.LENGTH_LONG).show()
+                        number_modify = number_modify.plus(1)
+                    }
+                    .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
+
+
+
+            }
+
+            if(!new_latitude.text.toString().isEmpty() && !new_longitude.text.toString().isEmpty() )
+            {
+                val point : GeoPoint
+                point = GeoPoint(new_latitude.text.toString().toDouble(),new_longitude.text.toString().toDouble())
+
+                containerShipRef
+                    .update("pos",point)
+                    .addOnSuccessListener {
+                        Log.d(TAG, " Latitude and Longitude successfully updated!")
+                        bateau.setLatitude(new_latitude.text.toString().toFloat())
+                        bateau.setLongitude(new_longitude.text.toString().toFloat())
+
+                    }
+                    .addOnFailureListener {
+                            e -> Log.w(TAG, "Error updating document", e)
+                    }
+44
+
+            }
+            else if(new_latitude.text.toString().isEmpty() && !new_longitude.text.toString().isEmpty())
+            {
+                Toast.makeText(this, "Latitude and latitude must be set", Toast.LENGTH_LONG).show()
+            }
+            else if(!new_latitude.text.toString().isEmpty() && new_longitude.text.toString().isEmpty())
+            {
+                Toast.makeText(this, "Longitude and latitude must be set", Toast.LENGTH_LONG).show()
+            }
+
+            if (number_modify == 0)
+            {
+                //Toast.makeText(this, "No change to Update", Toast.LENGTH_LONG).show()
+            }
+            else {
+                number_modify = 0
+            }
+            ShowBoat.listeContainerShip.add(bateau)
         }
 
 
 
-    }
-
-    private fun verifyNoDataToChange(
-        number_modify: Int,
-        bateau: Containership
-    ) {
-        var number_modify1 = number_modify
-        if (number_modify1 == 0) {
-            Toast.makeText(this, "No change to Update", Toast.LENGTH_LONG).show()
-        } else {
-            number_modify1 = 0
-        }
-        ShowBoat.listeContainerShip.add(bateau)
-    }
-
-    private fun UpdateData(
-        new_name: TextInputEditText,
-        containerShipRef: DocumentReference,
-        bateau: Containership,
-        number_modify: Int,
-        new_captain: TextInputEditText
-    ): Int {
-        var number_modify1 = number_modify
-        if (!new_name.text.toString().isEmpty()) {
-
-
-            containerShipRef
-                .update(
-                    "name", new_name.text.toString()
-
-                )
-                .addOnSuccessListener {
-                    Log.d(TAG, "Name successfully updated!")
-                    bateau.setName(new_name.text.toString())
-                    Toast.makeText(this, "new name update", Toast.LENGTH_LONG).show()
-                    number_modify1 = number_modify1.plus(1)
-                }
-                .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
-
-
-        }
-
-        if (!new_captain.text.toString().isEmpty()) {
-            containerShipRef
-                .update(
-                    "captain_name", new_captain.text.toString()
-                )
-                .addOnSuccessListener {
-                    Log.d(TAG, " Captain Name successfully updated!")
-                    bateau.setCaptainName(new_captain.text.toString())
-                    Toast.makeText(this, "new  captain name update", Toast.LENGTH_LONG).show()
-                    number_modify1 = number_modify1.plus(1)
-                }
-                .addOnFailureListener { e -> Log.w(TAG, "Error updating document", e) }
-
-
-        }
-        verifyNoDataToChange(number_modify, bateau)
-        return number_modify1
     }
 
 }

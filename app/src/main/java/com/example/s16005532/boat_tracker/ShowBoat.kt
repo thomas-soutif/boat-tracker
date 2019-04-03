@@ -29,12 +29,8 @@ class ShowBoat : AppCompatActivity(){
         var listeContainerShip: ArrayList<Containership> = ArrayList()
     }
 
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG,"resume Show Boat")
 
 
-    }
     override fun onCreate(savedInstanceState: Bundle?) {
 
         Log.d(TAG,"hey listen")
@@ -133,6 +129,7 @@ class ShowBoat : AppCompatActivity(){
                 actual_boat = list.get(position)
 
                 startActivity(myintent)
+                this.recreate()
 
             }
 

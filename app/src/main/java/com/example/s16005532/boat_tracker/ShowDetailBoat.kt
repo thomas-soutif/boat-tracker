@@ -53,6 +53,7 @@ class ShowDetailBoat : AppCompatActivity() {
 
             val myintent : Intent = Intent(this,ModifyBoat::class.java)
             startActivity(myintent)
+
         }
 
     }
